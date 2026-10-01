@@ -1,0 +1,167 @@
+import { BillSeed, StationInfo } from './models'
+
+// 车站危险货物办理资质表（按品类代码）
+export const STATIONS: StationInfo[] = [
+  { name: '兰州西', qualified: ['3', '8'] },
+  { name: '桑园子', qualified: ['3'] },
+  { name: '天水', qualified: ['3'] },
+  { name: '宝鸡西', qualified: ['3', '8'] },
+  { name: '西安国际港', qualified: ['8', '3'] },
+  { name: '新丰镇', qualified: ['8'] },
+  { name: '三门峡西', qualified: ['8'] },
+  { name: '洛阳东', qualified: ['8'] },
+  { name: '郑州北', qualified: ['3', '8', '1'] },
+  { name: '商丘', qualified: ['3'] },
+  { name: '徐州东', qualified: ['3', '8'] },
+  { name: '南京东', qualified: ['3', '8'] },
+  { name: '合肥东', qualified: ['8', '3'] },
+  { name: '宁波北', qualified: ['8'] },
+  { name: '上海西', qualified: ['3', '8'] },
+  { name: '安康', qualified: ['3', '8'] },
+  { name: '襄阳', qualified: ['3', '8'] },
+]
+
+// 会签角色：安全、运营、应急 三方齐全
+export const ROLES = ['安全科', '运输运营科', '应急指挥中心']
+
+export const BILLS: BillSeed[] = [
+  {
+    id: 'HG-260929-018',
+    cargo: '甲醇（UN1230）',
+    classCode: '3',
+    hazardClass: '第 3 类 · 易燃液体',
+    trainCode: 'X8021',
+    origin: '兰州西',
+    destination: '南京东',
+    tonnage: 1860,
+    wagonCount: 28,
+    permitNo: '甘危运〔2026〕0831 号',
+    permitValidUntil: '2026-12-31',
+    path: [
+      { id: 'S-201', name: '兰州枢纽东联络线', from: '兰州西', to: '桑园子', km: '24.6', risks: ['高架桥', '人员密集'], level: '中' },
+      { id: 'S-203', name: '西峡水源保护区段', from: '天水', to: '宝鸡西', km: '132.4', risks: ['水源地', '长隧道'], level: '高' },
+      { id: 'S-207', name: '郑州北至商丘区段', from: '郑州北', to: '商丘', km: '188.2', risks: ['人口密集', '桥梁群'], level: '高' },
+      { id: 'S-211', name: '徐州东至南京东', from: '徐州东', to: '南京东', km: '316.8', risks: ['隧道群'], level: '低' },
+    ],
+    altPaths: [
+      { id: 'A1', name: '经安康、襄阳绕行', km: '1742.0', segments: [
+        { from: '兰州西', to: '安康', km: '612.0' }, { from: '安康', to: '襄阳', km: '370.0' }, { from: '襄阳', to: '南京东', km: '760.0' } ] },
+      { id: 'A2', name: '经宝鸡西绕行（仍经封锁区段，不可用）', km: '1450.0', segments: [
+        { from: '兰州西', to: '天水', km: '310.0' }, { from: '天水', to: '宝鸡西', km: '132.4' }, { from: '宝鸡西', to: '南京东', km: '1007.6' } ] },
+    ],
+    needStations: ['兰州西', '天水', '郑州北', '南京东'],
+  },
+  {
+    id: 'HG-260930-006',
+    cargo: '氢氧化钠溶液（UN1824）',
+    classCode: '8',
+    hazardClass: '第 8 类 · 腐蚀性物质',
+    trainCode: 'X9116',
+    origin: '西安国际港',
+    destination: '宁波北',
+    tonnage: 1240,
+    wagonCount: 20,
+    permitNo: '陕危运〔2026〕1022 号',
+    permitValidUntil: '2026-10-20',
+    path: [
+      { id: 'S-301', name: '西安国际港联络线', from: '西安国际港', to: '新丰镇', km: '31.2', risks: ['枢纽密集'], level: '低' },
+      { id: 'S-304', name: '三门峡至洛阳区段', from: '三门峡西', to: '洛阳东', km: '122.3', risks: ['隧道', '跨河桥'], level: '中' },
+      { id: 'S-309', name: '合肥东至宁波北', from: '合肥东', to: '宁波北', km: '526.9', risks: ['水源地'], level: '低' },
+    ],
+    altPaths: [],
+    needStations: ['西安国际港', '洛阳东', '合肥东', '宁波北'],
+  },
+  {
+    id: 'HG-260930-011',
+    cargo: '汽油（UN1203）',
+    classCode: '3',
+    hazardClass: '第 3 类 · 易燃液体',
+    trainCode: 'X8055',
+    origin: '兰州西',
+    destination: '上海西',
+    tonnage: 1620,
+    wagonCount: 26,
+    permitNo: '甘危运〔2026〕0902 号',
+    permitValidUntil: '2026-11-30',
+    path: [
+      { id: 'S-401', name: '兰州枢纽东联络线', from: '兰州西', to: '桑园子', km: '24.6', risks: ['高架桥'], level: '中' },
+      { id: 'S-402', name: '西峡水源保护区段', from: '天水', to: '宝鸡西', km: '132.4', risks: ['水源地', '长隧道'], level: '高' },
+      { id: 'S-403', name: '郑州北至商丘区段', from: '郑州北', to: '商丘', km: '188.2', risks: ['桥梁群'], level: '高' },
+      { id: 'S-404', name: '徐州东至上海西', from: '徐州东', to: '上海西', km: '620.0', risks: ['人口密集'], level: '低' },
+    ],
+    altPaths: [],
+    needStations: ['兰州西', '天水', '郑州北', '徐州东', '上海西'],
+  },
+  {
+    id: 'HG-260930-024',
+    cargo: '硫酸（UN1830）',
+    classCode: '8',
+    hazardClass: '第 8 类 · 腐蚀性物质',
+    trainCode: 'X9108',
+    origin: '宝鸡西',
+    destination: '郑州北',
+    tonnage: 980,
+    wagonCount: 18,
+    permitNo: '陕危运〔2026〕1156 号',
+    permitValidUntil: '2026-12-15',
+    path: [
+      { id: 'S-501', name: '宝鸡西至天水区段', from: '宝鸡西', to: '天水', km: '132.4', risks: ['长隧道'], level: '高' },
+      { id: 'S-502', name: '西安国际港联络线', from: '西安国际港', to: '新丰镇', km: '31.2', risks: ['枢纽密集'], level: '低' },
+      { id: 'S-503', name: '三门峡至洛阳区段', from: '三门峡西', to: '洛阳东', km: '122.3', risks: ['跨河桥'], level: '中' },
+      { id: 'S-504', name: '洛阳东至郑州北', from: '洛阳东', to: '郑州北', km: '128.6', risks: ['人口密集'], level: '中' },
+    ],
+    altPaths: [
+      { id: 'A1', name: '经安康绕行', km: '1070.0', segments: [
+        { from: '宝鸡西', to: '安康', km: '430.0' }, { from: '安康', to: '郑州北', km: '640.0' } ] },
+    ],
+    needStations: ['宝鸡西', '天水', '洛阳东', '郑州北'],
+  },
+  {
+    id: 'HG-260930-031',
+    cargo: '甲醇（UN1230）',
+    classCode: '3',
+    hazardClass: '第 3 类 · 易燃液体',
+    trainCode: 'X8062',
+    origin: '兰州西',
+    destination: '合肥东',
+    tonnage: 1540,
+    wagonCount: 24,
+    permitNo: '甘危运〔2026〕0777 号',
+    permitValidUntil: '2026-09-25',
+    path: [
+      { id: 'S-601', name: '兰州枢纽东联络线', from: '兰州西', to: '桑园子', km: '24.6', risks: ['高架桥'], level: '中' },
+      { id: 'S-602', name: '西峡水源保护区段', from: '天水', to: '宝鸡西', km: '132.4', risks: ['水源地', '长隧道'], level: '高' },
+      { id: 'S-603', name: '郑州北至商丘区段', from: '郑州北', to: '商丘', km: '188.2', risks: ['桥梁群'], level: '高' },
+      { id: 'S-604', name: '商丘至合肥东', from: '商丘', to: '合肥东', km: '340.5', risks: ['人口密集'], level: '中' },
+    ],
+    altPaths: [
+      { id: 'A1', name: '经安康绕行', km: '1320.0', segments: [
+        { from: '兰州西', to: '安康', km: '612.0' }, { from: '安康', to: '合肥东', km: '708.0' } ] },
+    ],
+    needStations: ['兰州西', '天水', '郑州北', '合肥东'],
+  },
+  {
+    id: 'HG-260930-040',
+    cargo: '乙醇（UN1170）',
+    classCode: '3',
+    hazardClass: '第 3 类 · 易燃液体',
+    trainCode: 'X8077',
+    origin: '兰州西',
+    destination: '徐州东',
+    tonnage: 1410,
+    wagonCount: 22,
+    permitNo: '甘危运〔2026〕1015 号',
+    permitValidUntil: '2027-01-31',
+    path: [
+      { id: 'S-701', name: '兰州枢纽东联络线', from: '兰州西', to: '桑园子', km: '24.6', risks: ['高架桥'], level: '中' },
+      { id: 'S-702', name: '西峡水源保护区段', from: '天水', to: '宝鸡西', km: '132.4', risks: ['水源地', '长隧道'], level: '高' },
+      { id: 'S-703', name: '郑州北至商丘区段', from: '郑州北', to: '商丘', km: '188.2', risks: ['桥梁群'], level: '高' },
+      { id: 'S-704', name: '商丘至徐州东', from: '商丘', to: '徐州东', km: '156.0', risks: ['人口密集'], level: '低' },
+    ],
+    altPaths: [
+      { id: 'A1', name: '经安康、襄阳绕行', km: '1498.0', segments: [
+        { from: '兰州西', to: '安康', km: '612.0' }, { from: '安康', to: '襄阳', km: '370.0' }, { from: '襄阳', to: '徐州东', km: '516.0' } ] },
+    ],
+    needStations: ['兰州西', '天水', '郑州北', '商丘', '徐州东'],
+  },
+]

@@ -11,7 +11,12 @@ import { MatChipsModule } from '@angular/material/chips'
   template: `
     <mat-toolbar class="topbar">
       <div class="brand"><span>铁</span><div><b>危险货物运输审批台</b><small>RAIL HAZMAT CONTROL</small></div></div>
-      <nav><a mat-button routerLink="/workspace" routerLinkActive="active">路径编组</a><a mat-button routerLink="/risk-map" routerLinkActive="active">风险地图</a><a mat-button routerLink="/approval" routerLinkActive="active">多角色审批</a></nav>
+      <nav>
+        <a mat-button routerLink="/blockage" routerLinkActive="active">封锁处置令</a>
+        <a mat-button routerLink="/workspace" routerLinkActive="active">路径编组</a>
+        <a mat-button routerLink="/risk-map" routerLinkActive="active">风险地图</a>
+        <a mat-button routerLink="/approval" routerLinkActive="active">多角色审批</a>
+      </nav>
       <span class="spacer"></span><mat-chip highlighted>协同在线 8</mat-chip><button mat-flat-button color="primary">提交审批</button>
     </mat-toolbar>
     <router-outlet />
